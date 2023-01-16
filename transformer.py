@@ -233,7 +233,7 @@ def train(transformer, opt, loss, bs, num_batches, d_model, pos_enc, mask, max_s
         target = target.to(device)
 
         pe = pos_enc[0,:seq_len+1,:d_model]
-        msk = mask[0, seq_len+1,: seq_len+1]
+        msk = mask[0, :seq_len+1,: seq_len+1]
         pred = transformer(enc_src, dec_src, pe, None, msk)
 
         pred = pred.permute(0,2,1)
@@ -276,7 +276,7 @@ def demo_model(model):
     mask = mask.to(device)
 
     pe = pos_enc[0,:seq_len+1,:d_model]
-    msk = mask[0, seq_len+1,: seq_len+1]
+    msk = mask[0, :seq_len+1,: seq_len+1]
     pred = model(enc_src, dec_src, pe, None, msk)
 
     pred = pred.permute(0,2,1)
@@ -359,7 +359,7 @@ def load_model():
 
     return model
 
-model = load_model()
-to_cuda(model)
-demo_model(model)
-continue_train(model)
+# model = load_model()
+# to_cuda(model)
+# demo_model(model)
+# continue_train(model)
